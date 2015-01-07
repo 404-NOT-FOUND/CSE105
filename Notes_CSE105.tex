@@ -1,0 +1,453 @@
+%%***********************************************
+%% 		Setups
+%%***********************************************
+\documentclass[12pt, letterpaper, titlepage]{article}
+%	\setlength{\columnsep}{31pt}		% space b/w columns;
+
+% margins
+\usepackage[top=.5in, bottom=1.2in, left=.7in, right=.7in]{geometry}
+
+% title
+\title{\Huge CSE 105: \\ Computation
+	   \\[-1em] \rule{.8\textwidth}{1pt}
+}
+\author{\LARGE{\it by} Jy}
+\date{}
+%\thanks{}
+
+%***********************************************
+% 		Graphs
+%***********************************************
+
+%% space of caption and the context;
+%	\setlength{\abovecaptionskip}{10pt}
+%	\setlength{\belowcaptionskip}{15pt}
+%\usepackage{subfigure}
+\usepackage{graphicx}
+	\graphicspath{{pics/}}
+
+%% figures with text wrapped around;
+%\usepackage{wrapfig}
+%\usepackage{picins}
+
+\usepackage{tikz}
+%	\usetikzlibrary{arrows}
+%%\usepackage{tkz-euclide}
+%\usepackage{pgfplots}
+%	\tikzset{
+%	myvec/.style={blue, line width = .5pt, -stealth'},
+%	every node/.style={black},
+%	box/.style={rectangle, rounded corners=5pt,
+%			minimum width=30pt, minimum height=15pt,
+%			inner sep=5pt,
+%			draw=silver, fill=lightpurple},
+%	}
+
+% trees
+\usepackage{tikz-qtree}
+% \usepackage{pst-tree}
+
+%% set wallpaper
+%\usepackage{wallpaper}
+%	\CenterWallPaper{1}{}
+
+%% Include movies
+%\usepackage{media9}
+
+%% use colors
+\usepackage{xcolor}
+	\definecolor{lightblue}{RGB}{39, 104, 192}
+	\definecolor{silver}{RGB}{200,191,231}
+	\definecolor{lightpurple}{RGB}{200,200,240}
+
+%%***********************************************
+%% 		Tables
+%%***********************************************
+
+%% tables w/ wrapped lines;
+%\usepackage{tabularx}
+%	\newcommand{\ahsize}[1]{ \setlength{\hsize}{#1\hsize} }
+%	\newcommand{\bhsize}[1]{ \setlength{\hsize}{#1} }
+
+%% sideways
+\usepackage{rotating}
+
+%% makecell
+%\usepackage{makecell}
+%	\makegapedcells
+%	\setcellgapes{6pt}
+
+%% color for tables;
+%\usepackage{colortbl}
+%% toprule, midrule & bottomrule;
+%\usepackage{booktabs}
+\usepackage{array} %解决前置命令问题；
+	\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+	\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+	\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+	\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+	\newcolumntype{M}[1]{>{$}#1<{$}}
+
+%% multirow;
+\usepackage{multirow}
+
+%% long table + tabularx;
+%\usepackage{ltxtable, filecontents}
+
+%%***********************************************
+%% 		Coding
+%%***********************************************
+
+%	\usepackage{listings}
+%		\lstset{
+%			language=C++,
+%			breaklines=true,				%自动换行;
+%			extendedchars=false,			%这一条命令可以解决代码跨页时，章节标题，页眉等汉字不显示的问题;
+%			numbers=left,
+%			numberstyle=\scriptsize,
+%			stepnumber=2, 				%行标跳过数;
+%			numbersep=1.5em, 				%行标与代码框距离;
+%			tabsize=4,
+%			basicstyle=\footnotesize\ttfamily,
+%			stringstyle=\color{lightblue},
+%			keywordstyle=\color{blue!80},
+%			commentstyle=\color{red!70!green!70!blue!90},
+%			frame=shadowbox,
+%%			showspaces=false,
+%			showstringspaces=false,
+%			showtabs=false,
+%			rulesepcolor=\color{red!20!green!20!blue!20},
+%			backgroundcolor=\color{red!10!green!3!blue!10},
+%			escapeinside=``,
+%			xleftmargin=8em,
+%			xrightmargin=5em,
+%			framexleftmargin=2pt,
+%			framexrightmargin=2pt,
+%			aboveskip=1em
+%		}
+%		\renewcommand{\lstlistingname}{CODE}
+
+%***********************************************
+% 		Fonts
+%***********************************************
+
+%% English;
+\usepackage{fontspec}
+	\setmainfont[Mapping=tex-text]{Times New Roman}
+	\setsansfont[Mapping=tex-text]{Calibri}
+	\setmonofont{Courier New}
+%	\newfontfamily\rh{Lucida Handwriting}	% rh for Round Handing
+%	\newfontfamily\sc{John Handy LET}	% sc for script
+%	\newfontfamily\hw{Bradley Hand ITC}	% hw for HandWritting
+%% Chinese;
+%\usepackage[CJKchecksingle, CJKnumber]{xeCJK}
+%	\setCJKmainfont[BoldFont = {STXingkai}, ItalicFont = {STFangsong}]{Microsoft YaHei}
+%	\setCJKsansfont{}
+%	\setCJKmonofont{KaiTi}
+%	\punctstyle{hangmobanjiao}
+%\newcommand{\CJKdash}{\rule[3.5pt]{9pt}{.77pt} \hspace{-1.5mm} \rule[3.5pt]{9pt}{.77pt} }
+
+%%***********************************************
+%% 		Looking
+%%***********************************************
+
+%% links
+\usepackage[bookmarksnumbered, pdfencoding=auto, pdfborder=1, breaklinks,
+			colorlinks, linkcolor=lightblue, urlcolor=blue]{hyperref}
+	\hypersetup{
+		unicode=false,			% non-Latin characters in Acrobat’s bookmarks
+		pdftoolbar=true,		% show Acrobat toolbar?
+		pdfmenubar=true,		% show Acrobat menu?
+		pdftitle={},			% title
+		pdfauthor={Jinyao Yuan},% author
+		pdfsubject={},			% subject of the document
+		pdfcreator={Jinyao Yuan},	% creator of the document
+		pdfproducer={Jinyao Yuan},	% producter of the document
+		citecolor=green,		% color of links to bibliography
+		filecolor=magenta,		% color of file links
+	}
+
+	%% page style
+	%%---------------------------------------------------------------------------
+	\usepackage{fancyhdr}
+	\pagestyle{fancy}
+	\lhead{}
+	\chead{}
+	\rhead{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}
+	\lfoot{}
+	\cfoot{}
+	\rfoot{\thepage}
+
+%% paragraphs
+%%---------------------------------------------------------------------------
+\usepackage{setspace}
+	\onehalfspacing
+%	\doublespacing
+	\setlength{\parindent}{2em}
+	\addtolength{\parskip}{3pt}
+	\usepackage{indentfirst}
+
+%% floats
+%%---------------------------------------------------------------------------
+% \renewcommand{\textfraction}{0.15}
+% \renewcommand{\topfraction}{0.85}
+% \renewcommand{\bottomfraction}{0.65}
+\renewcommand{\floatpagefraction}{0.70}
+
+\usepackage[section]{placeins}
+% \usepackage[below]{placeins}
+\usepackage{caption}
+
+%% underline
+%%---------------------------------------------------------------------------
+\usepackage{ulem}
+%\usepackage{CJKfntef}
+
+
+%% convert terms into Chinese;
+%%---------------------------------------------------------------------------
+%\renewcommand{\contentsname}{\hfill 目~录 \hfill}
+%\renewcommand{\listfigurename}{图目录}
+%\renewcommand{\listtablename}{表目录}
+%\renewcommand{\thepart}{\CJKnumber{\arabic{part}}}
+%\renewcommand{\partname}{第\CJKnumber{\thepart}章}
+%\renewcommand{\thesection}{\CJKnumber{\arabic{section}}}
+%\newcommand{\sectionname}{\thesection 节}
+%\renewcommand{\figurename}{图}
+%\renewcommand{\figureautorefname}{图}
+%\renewcommand{\tablename}{表}
+%\renewcommand{\tableautorefname}{表}
+%\renewcommand {\thefootnote}{\arabic{footnote}}
+%\renewcommand{\footnoteautorefname}{脚注}
+%\renewcommand{\abstractname}{摘 \quad 要}
+%\renewcommand{\appendixname}{附录{\thechapter}}
+%\renewcommand{\appendixautorefname}{附录}
+%\renewcommand{\bibname}{参考文献}
+%\renewcommand{\indexname}{索引}
+
+%% make own style of section titles;
+%%---------------------------------------------------------------------------
+\usepackage{titlesec}
+%	\titleformat{\part}{\center\Huge \bf}{\thepart}{1em}{}
+%	\titleformat{\section}{\large \bf}{\thesection}{1em}{}
+	\titleformat{\part}[frame]{\normalfont}
+		{\small \enspace UNIT \thepart \enspace}{6pt}
+		{\LARGE\bf\filcenter}
+	\titlespacing*{\part}{1pc}{*4}{*3}[1pc]
+	\newcommand{\mypart}{\FloatBarrier\part}
+
+%% make own style of table of contents;
+%%---------------------------------------------------------------------------
+%\usepackage{titletoc}
+%\titlecontents{part}[0em]{\addvspace{10pt}\filright\bf\large}
+%		{\def\numberline##1{\thecontentslabel\quad\ignorespaces}}
+%		{}{\titlerule*[8pt]{.}\contentspage}
+%\titlecontents{section}[1em]{\addvspace{10pt}\filright\bf\large}
+%		{\def\numberline##1{\thecontentslabel\quad\ignorespaces}}
+%		{}{\titlerule*[8pt]{.}\contentspage}
+%\titlecontents{subsection}[2em]{\addvspace{5pt}\filright\bf}
+%		{\def\numberline##1{\thecontentslabel\quad\ignorespaces}}
+%		{}{\titlerule*[8pt]{.} \contentspage}
+
+%***********************************************
+% 		Utilities
+%***********************************************
+
+%% in-para enum, item, descript;
+%%---------------------------------------------------------------------------
+\usepackage{paralist}
+
+%% lettrine;
+%%---------------------------------------------------------------------------
+%\usepackage{lettrine}
+%	\newcommand{\mylettrine}[1]{\lettrine[lines=2,lraise=0,nindent=0em]{#1\hspace{1mm}}{}}
+
+%% Math;
+%%---------------------------------------------------------------------------
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{venndiagram}
+%\usepackage{extarrows} 	% special arrows like \xlongequal;
+%\input{longdiv.tex}	% divisions;
+%\usepackage{dcolumn}	% vertical calculation w/ tabular;
+\usepackage{cancel}	% strike out numbers
+
+%% Theorems;
+%%---------------------------------------------------------------------------
+\newtheoremstyle{mystyle}
+	{2em}	% spaceabove
+	{2em}	% spacebelow
+	{\it}	% bodyfont
+	{0em}	% indent
+	{\bf}	% headfont
+	{}   	% headpunctuation
+	{1em}	% headspace
+	{%
+		\thmname{#1} \thmnumber{#2} \thmnote{#3}.
+	}   	% headspecify
+\theoremstyle{mystyle}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+
+%% symbols
+%%---------------------------------------------------------------------------
+\newcommand{\phteq}{ \phantom{{}={}} }
+\renewcommand{\(}{ \left(  }
+\renewcommand{\)}{ \right) }
+\newcommand{\nth}{\ensuremath{^\text{th}} }
+\newcommand{\st}{\ensuremath{^\text{st}} }
+\newcommand{\nd}{\ensuremath{^\text{nd}} }
+\newcommand{\rd}{\ensuremath{^\text{rd}} }
+\newcommand{\dd}{{ \; \mathrm{d} }}
+\newcommand{\abs}[1]{{ \left\lvert #1 \right\rvert }}
+
+%\newcommand{\dne}{ \mathrm{DNE} }	% Does Not Exist;
+%\newcommand{\defeq}{ \xlongequal{\mathrm{DEF}} }	% equal by definition;
+%\newcommand{\sqr}{ \ensuremath{^2} } % squared;
+% \newcommand{\cels}{{ \ensuremath{^\circ \mathrm{C}} }}
+%\newcommand{\fahr}{{ \ensuremath{^\circ \mathrm{F}} }}
+
+\newcommand{\combination}{ \mathrm{C} }
+\newcommand{\permutation}{ \mathrm{P} }
+\newcommand{\variance}[1]{{ \mathrm{Var}(#1) }}
+\newcommand{\stirling}{ \mathrm{S} }
+\newcommand{\powerset}{ \mathbb{P} }
+\newcommand{\Degree}{ \mathbb{Deg} }
+\newcommand{\degree}{ \mathbb{deg} }
+
+%% visiblespace
+\renewcommand\textvisiblespace[1][.5em]{%
+	\makebox[#1]{%
+		\kern.07em
+		\vrule height.3ex
+		\hrulefill
+		\vrule height.3ex
+		\kern.07em
+	}
+}
+
+%% fillable forms
+%%---------------------------------------------------------------------------
+%\newcommand{\fform}[2]{
+%#1 \vbox{\hbox{\TextField[name=#1,width=#2,borderwidth=0]{\null}}\kern0pt\hrule}
+%}
+
+%% Margin notes;
+%%---------------------------------------------------------------------------
+\usepackage{marginnote}
+\marginparsep 2em
+\marginparwidth 2.5in
+
+% fancy boxes like \fbox,\shadowbox,\doublebox,\ovalbox, \Ovalbox。
+\usepackage{fancybox}
+
+%%***********************************************
+%%	Self-defined environments
+%%***********************************************
+
+\usepackage{float} % used to define float environments
+
+%% list point
+%%---------------------------------------------------------------------------
+%\newcommand{\lspnt}[1]{&\textrm{#1}}
+%\newenvironment{pntlist} {
+%	$
+%	\left\{
+%	\begin{aligned}
+%}{
+%	\end{aligned}
+%	\right.
+%	$
+%}
+
+%% centered graph
+%%---------------------------------------------------------------------------
+\newcommand{\centgraph}[2][.7\linewidth]{
+	\begin{center}
+		\includegraphics[width=#1]{#2}
+	\end{center}
+}
+
+%% questions & solutions
+%%---------------------------------------------------------------------------
+%\input{environment.question/quest.tex}
+
+% shadowpage
+%---------------------------------------------------------------------------
+\newenvironment{shadowpage}%
+{
+	\begin{Sbox} \begin{minipage}
+	}{
+	\end{minipage} \end{Sbox}
+	\setlength{\fboxsep}{10pt}
+	\shadowbox{\TheSbox}
+}%
+
+% examples
+%---------------------------------------------------------------------------
+
+%\floatstyle{plaintop}
+%\newfloat{exp}{htb}{log}[subsection]
+%\floatname{exp}{Example}
+\DeclareCaptionType[%
+	placement=htbp,
+	within=section,
+	fileext=loe
+]{myExample}[Example][List of Examples]
+\newenvironment{example}[1][~]%
+{%
+	\begin{myExample}
+		\hfill
+		\begin{Sbox}
+			\begin{minipage}{.8\linewidth}
+				\footnotesize
+				\vspace{-.5em} \caption{#1} ~ \\[-2em]
+				\rule{\linewidth}{.3pt}
+				\par
+				\setlength{\parindent}{2em}
+				\addtolength{\parskip}{3pt}
+			}{%
+			\end{minipage}
+		\end{Sbox}
+		\setlength{\fboxsep}{10pt}
+		\shadowbox{\TheSbox}
+	\end{myExample}
+}%
+
+%\newenvironment{example}%
+%{
+%	\par\noindent
+%	\hfill
+%	\begin{Sbox}
+%	\begin{minipage}{.8\linewidth}
+%	\footnotesize
+%	{\bf Example} \\[-1em]
+%	\rule{\linewidth}{.5pt}
+%	\par
+%	\setlength{\parindent}{2em}
+%}{
+%	\end{minipage}
+%	\end{Sbox}
+%	\setlength{\fboxsep}{10pt}
+%	\fbox{\TheSbox}
+%	\par
+%}%
+
+
+
+%***********************************************
+% 		START
+%***********************************************
+\begin{document}
+
+\maketitle
+\renewcommand{\thepage}{\roman{page}}\setcounter{page}{1}
+\tableofcontents\clearpage
+\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}
+
+\input{lec1}
+
+\end{document}
+

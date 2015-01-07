@@ -107,3 +107,10 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+# metapost
+*.[0-9]
+*.[1-9][0-9]
+*.mpx
+mptextmp.mp
+

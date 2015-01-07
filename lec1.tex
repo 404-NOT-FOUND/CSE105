@@ -1,0 +1,91 @@
+
+\section{Deterministic Finite Automaton (DFA)}
+% ==================================================
+
+Machine receives a string consisted of `1's and `0's as input.
+
+\[
+    \xrightarrow{010110} \fbox{M} \xrightarrow{1/0 (True / False, Accept / Reject)}
+\]
+
+\begin{example}[]
+    \label{}
+    % pic
+\end{example}
+
+\begin{definition}[DFA]
+    A DFA is 5-tuple
+    \[
+        M = (Q,\Sigma,\delta,s,F)
+    \]
+    where
+    \begin{compactdesc}
+    \item[$Q$] Finite set,  for states
+    \item[$\Sigma$] Finite set,  for input alphabet
+    \item[$s$] $\in Q$,     for start states
+    \item[$F$] $\subseteq Q$, for accepting states
+    \item[$\delta$]
+        $Q \times \Sigma \mapsto Q$,
+        a function that specifies the transition between states
+    \end{compactdesc}
+\end{definition}
+
+\begin{example}[]
+    \label{}
+    According to the definition \autoref{def:DFA}, 
+    the machine in \autoref{exa:a_DFA} can be denoted by 
+    \[
+        M = (Q,\Sigma,\delta,s,F)
+    \]
+    where
+    \begin{compactitem}
+    \item $Q = \{ A,B,C \}$
+    \item $\Sigma = \{ 0,1 \}$
+    \item $s = \{ A \}$
+    \item $F = \{ B,C \}$
+    \end{compactitem}
+    And function $\delta$ can be described by the table below.
+    \begin{center} \begin{tabular}{Mc Mc Mc}
+        \hline
+        \delta & 0 & 1  \\
+        \hline
+        A      & A & B  \\
+        B      & C & A  \\
+        C      & B & C  \\
+        \hline
+    \end{tabular} \end{center}
+
+\end{example}
+
+\begin{definition}[$f_M$]
+    For any DFA $ M = (Q,\Sigma,\delta,s,F) $,
+    let 
+    \[
+        f_M : \Sigma^* \mapsto \{ \text{True}, \text{False} \}
+    \]
+    where $\Sigma^*$ is a set of strings over $\Sigma$.
+
+    \[
+        f_M(w)
+        = \begin{cases}
+            \text{True},   \quad \delta^*(s,w) \in F
+            \text{False},  \quad \text{eles}
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[$\delta^*$]
+    \[
+        \delta^* : Q \times \Sigma^* \mapsto Q
+    \]
+    which is an inductive function defined as
+    \[
+        \begin{cases}
+            \delta^*(q, \varepsilon) = q \\
+            \delta^*(q, aw) = \delta^*\( \delta(a,q), w \)
+        \end{cases}
+    \]
+    where $q \in Q, a \in \Sigma, w \in \Sigma^*)$.
+\end{definition}
+
+
