@@ -80,25 +80,6 @@ simple_loop( a0 2, "right", "1" );
 
 endfig;
 % --------------------------------------------------
-beginfig(1); 
-
-with spacing((82,29)) matrix.a(1,5);
-
-node.a[0][0]( TEX("A") );
-node.a[0][1]( TEX("B") );
-node.a[0][2]( TEX("C") );
-node.a[0][3]( TEX("D") );
-node_double.a[0][4]( TEX("E") );
-
-incoming.top(0, "start") (a[0][0]) 120;
-
-simple_connect( a0 0, a0 1,   0, "1" );
-simple_connect( a0 1, a0 2,  45, "7" );
-simple_connect( a0 2, a0 3, -45, "2" );
-simple_connect( a0 3, a0 4, 225, "1" );
-
-endfig;
-% --------------------------------------------------
 
 end
 
