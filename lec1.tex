@@ -66,8 +66,8 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
     \end{compactdesc}
 \end{definition}
 
-\begin{example}[]
-    \label{}
+\begin{example}[Denoting machine in \autoref{exa:a_DFA}]
+
     According to definition \autoref{def:DFA}, 
     the machine in \autoref{exa:a_DFA} can be denoted by 
     \[
@@ -105,7 +105,7 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
         f_M(w)
         = \begin{cases}
             \text{True},   &\delta^*(s,w) \in F  \\
-            \text{False},  &\text{eles}
+            \text{False},  &\text{else}
         \end{cases}
     \]
 \end{definition}
@@ -118,10 +118,10 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
     \[
         \begin{cases}
             \delta^*(q, \varepsilon) = q \\
-            \delta^*(q, aw) = \delta^*\( \delta(a,q), w \)
+            \delta^*(q, aw) = \delta^*\( \delta(q,a), w \)
         \end{cases}
     \]
-    where $q \in Q, a \in \Sigma, w \in \Sigma^*)$.
+    where $varepsilon$ is an empty string and $q \in Q, a \in \Sigma, w \in \Sigma^*)$.
 \end{definition}
 
 
