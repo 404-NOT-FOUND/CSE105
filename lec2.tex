@@ -1,0 +1,81 @@
+
+\begin{definition}[Configurations]
+    \[
+        Conf = Q \times \Sigma^*
+    \]
+
+\end{definition}
+
+\begin{definition}[Initial Configurations]
+    The initial configuration of a machine $I_M(w) \in Conf$
+    \[
+        I_M(w) = ( s,w )
+    \]
+\end{definition}
+
+\begin{definition}[Final Configurations]
+    The final configuration of a machine $H_M(w) \subseteq Conf$
+    \[
+        H_M(w) = \{ (q,u) \mid q \in Q, u = \varepsilon \}
+    \]
+\end{definition}
+
+\begin{definition}[Output]
+    The output of a machine is a function that returns either ``True'' or ``False.''
+    \[
+        O_M \colon H_M \mapsto \{ \text{True},\text{False} \}
+    \]
+    defined as
+    \[
+        O_M(q,\varepsilon)
+        = \begin{cases}
+            \text{True},   & q \in F  \\
+            \text{False},  & \text{else}
+        \end{cases}
+    \]
+\end{definition}
+
+\begin{definition}[]
+    $R_M \subseteq Conf$
+
+    \[
+        R_M = \rightarrow_M
+        = \{
+            (q, aw) \rightarrow \( \delta(q,a),w\)
+            \mid q \in Q, a \in \Sigma, w \in \Sigma^*
+        \}
+    \]
+\end{definition}
+
+\begin{example}[\autoref{exa:a_DFA} as configurations]
+
+    With input ``10010'' write in mathematical language the configurations of machine in
+    \autoref{exa:a_DFA}:
+    \begin{align*}
+        I_M (10010)
+        =               (A, 10010)
+        \rightarrow     (B, 0010)
+        \rightarrow     (C, 010)
+        \rightarrow     (B, 10)
+        \rightarrow     (A, 0)
+        \rightarrow     (A, \varepsilon)
+        \in             H_M
+    \end{align*}
+    And thus the output
+    \[
+        O_F (A,\varepsilon) = \text{False}
+    \].
+
+    The machine in fact will only accept integers that are \emph{not} multiples of 3.
+\end{example}
+
+\begin{definition}[]
+    \[
+        f'_M (w) = O_F (C_n)
+    \]
+\end{definition}
+
+% \[
+%     L(M) = \{ w \in \Sigma^* \mid f_M(w) = \text{True} \}
+%     L(M_1)  \Sigma^*
+% \]
