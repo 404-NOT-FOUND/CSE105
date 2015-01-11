@@ -1,42 +1,44 @@
 
+\subsection{Configurations of DfA's}
+% --------------------------------------------------
+
 \begin{definition}[Configurations]
     \[
-        Conf = Q \times \Sigma^*
+        \Conf = Q \times \Sigma^*
     \]
-
 \end{definition}
 
 \begin{definition}[Initial Configurations]
-    The initial configuration of a machine $I_M(w) \in Conf$
+    The initial configuration of a machine $I_M(w) \in \Conf$
     \[
         I_M(w) = ( s,w )
     \]
 \end{definition}
 
 \begin{definition}[Final Configurations]
-    The final configuration of a machine $H_M(w) \subseteq Conf$
+    The final configuration of a machine $H_M(w) \subseteq \Conf$
     \[
-        H_M(w) = \{ (q,u) \mid q \in Q, u = \varepsilon \}
+        H_M(w) = \set{ (q,u) \mid q \in Q, u = \varepsilon }
     \]
 \end{definition}
 
 \begin{definition}[Output]
-    The output of a machine is a function that returns either ``True'' or ``False.''
+    The output of a machine is a function that returns either ``$\true$'' or ``$\false$.''
     \[
-        O_M \colon H_M \mapsto \{ \text{True},\text{False} \}
+        O_M \colon H_M \mapsto \set{ \true,\false }
     \]
     defined as
     \[
         O_M(q,\varepsilon)
         = \begin{cases}
-            \text{True},   & q \in F  \\
-            \text{False},  & \text{else}
+            \true,   & q \in F  \\
+            \false,  & \text{else}
         \end{cases}
     \]
 \end{definition}
 
-\begin{definition}[]
-    $R_M \subseteq Conf$
+\begin{definition}[] %% ?
+    $R_M \subseteq \Conf$
 
     \[
         R_M = \rightarrow_M
@@ -47,8 +49,7 @@
     \]
 \end{definition}
 
-\begin{example}[\autoref{exa:a_DFA} as configurations]
-
+\begin{example}[Configurations of machine in \autoref{exa:a_DFA}]
     With input ``10010'' write in mathematical language the configurations of machine in
     \autoref{exa:a_DFA}:
     \begin{align*}
@@ -63,7 +64,7 @@
     \end{align*}
     And thus the output
     \[
-        O_F (A,\varepsilon) = \text{False}
+        O_F (A,\varepsilon) = \false
     \].
 
     The machine in fact will only accept integers that are \emph{not} multiples of 3.
@@ -71,11 +72,11 @@
 
 \begin{definition}[]
     \[
-        f'_M (w) = O_F (C_n)
+        f'_n (w) = O_F (C_n)
     \]
 \end{definition}
 
 % \[
-%     L(M) = \{ w \in \Sigma^* \mid f_M(w) = \text{True} \}
+%     L(M) = \set{ w \in \Sigma^* \mid f_M(w) = \true }
 %     L(M_1)  \Sigma^*
 % \]
