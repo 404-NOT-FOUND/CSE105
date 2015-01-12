@@ -8,7 +8,7 @@ state.'' A machine receives a string consisted of `1's and `0's as input and the
 change as the machine reads through input digits. An arrow is used to indicate which state
 is to start with. See \autoref{exa:a_DFA} for detailed information.
 
-\subsection{Expressions of DfA's}
+\subsection{Expressions of DFA's}
 % --------------------------------------------------
 
 \begin{example}[A DFA]
@@ -53,10 +53,8 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
 \begin{definition}[DFA]
     \label{def:DFA}
 
-    A DFA is 5-tuple
-    \[
-        M = (Q,\Sigma,\delta,s,F)
-    \]
+    A DFA is a 5-tuple
+    \[ \DFA \]
     where
     \begin{compactdesc}
     \item[$Q$]      is a finite set,    for states
@@ -73,9 +71,7 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
 
     According to definition \autoref{def:DFA}, 
     the machine in \autoref{exa:a_DFA} can be denoted by 
-    \[
-        M = (Q,\Sigma,\delta,s,F)
-    \]
+    \[ \DFA \]
     where
     \begin{compactitem}
     \item $Q        = \set{ A,B,C }$
@@ -97,7 +93,7 @@ is to start with. See \autoref{exa:a_DFA} for detailed information.
 \end{example}
 
 \begin{definition}[$f_M$]
-    For any DFA $ M = (Q,\Sigma,\delta,s,F) $,
+    For any DFA $\DFA$,
     let 
     \[
         f_M : \Sigma^* \mapsto \set{ \true, \false }

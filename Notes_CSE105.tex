@@ -205,6 +205,17 @@
 \usepackage{ulem}
 %\usepackage{CJKfntef}
 
+%% emphasis
+%%---------------------------------------------------------------------------
+% \DeclareTextFontCommand{\emshape}{\itshape}
+\def\emshape{\itshape}
+\makeatletter
+\DeclareRobustCommand{\em}{%
+    \@nomath\em \if b\expandafter\@car\f@series\@nil \normalfont
+    \else \emshape \fi
+}
+\makeatother
+\DeclareTextFontCommand{\emph}{\em}
 
 %% convert terms into Chinese;
 %%---------------------------------------------------------------------------
@@ -303,8 +314,8 @@
 \newcommand{\dd}{{ \, \mathrm{d} }}
 \newcommand{\abs}[1]{{ \left\lvert #1 \right\rvert }}
 
-\newcommand{\set}[1]{{ \{\,#1\,\} }}
-\newcommand{\lst}[1]{{ \(\,#1\,\) }}
+\newcommand{\set}[1]{{ \left\{\,#1\,\right\} }}
+\newcommand{\lst}[1]{{ \left(\,#1\,\right) }}
 
 %\newcommand{\dne}{ \mathrm{DNE} }	% Does Not Exist;
 %\newcommand{\defeq}{ \xlongequal{\mathrm{DEF}} }	% equal by definition;
@@ -312,9 +323,10 @@
 % \newcommand{\cels}{{ \ensuremath{^\circ \mathrm{C}} }}
 %\newcommand{\fahr}{{ \ensuremath{^\circ \mathrm{F}} }}
 \newcommand{\Conf}{{ \mathrm{Conf} }}
-\newcommand{\true}{{ \text{True} }}
-\newcommand{\false}{{ \text{False} }}
+\newcommand{\true}{{ \text{\upshape True} }}
+\newcommand{\false}{{ \text{\upshape False} }}
 
+\newcommand{\DFA}{{ M = \lst{Q, \Sigma, \delta, s, F} }}
 \newcommand{\combination}{{ \mathrm{C} }}
 \newcommand{\permutation}{{ \mathrm{P} }}
 \newcommand{\variance}[1]{{ \mathrm{Var}(#1) }}
@@ -455,6 +467,7 @@
 
 \input{lec1}
 \input{lec2}
+\input{lec3}
 
 \end{document}
 

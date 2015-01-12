@@ -1,0 +1,73 @@
+
+A subset of $\Sigma^*$ of a DFA that contains all inputs to which the output of the
+machine is $\true$ is called the \emph{language} of the machine.
+
+\begin{definition}[Regularity of Language]
+    $ L \subseteq \Sigma^* $
+    is regular if
+    \[
+        \exists {\text{\upshape DFA} M} \mid L(M) = L
+    \]
+\end{definition}
+
+\begin{example}[]
+    Given that
+    $\varepsilon^* = \set{\varepsilon}$
+    and
+    $\Sigma^* = \set{\varepsilon,1,0,10,101,\cdots} = \set{0,1}^*$,
+    which of the following languages are regular?
+    \begin{compactitem}
+    \item
+        $L_1 = \set{ w \in \set{0,1}^* \mid w \text{ is not a multiple of } 3}$,
+    \item
+        $L_2 = \set{ w \in \set{0,1}^* \mid w \text{ is a power of } 2}$, and
+    \item
+        $L_2 = \set{ w \in \set{0,1}^* \mid w \text{ is a power of } 3}$.
+    \end{compactitem}
+    
+    %% draw dfa to test
+    %% l1, l2 are regular, l3 is not
+
+\end{example}
+
+\begin{definition}[Operations on Languages] \ \\
+    \begin{compactdesc}
+    \item[Complement]
+        $L^C = \set{w \in \Sigma^* \mid w \notin L}$
+    \item[Union]
+        $L_1 \cup L_2 = \set{w \in \Sigma^* \mid w \in L_1 \vee w \in L_2}$
+    \item[Intersection]
+        $L_1 \cap L_2 = \set{w \mid w \in L_1 \wedge \in L_2}$
+    \item[Dot Product]
+        $L_1 \cdot L_2 = \set{w_1 \cdot w_2 \mid w \in L_1, w_2 \in L_2}$
+    \end{compactdesc}
+\end{definition}
+
+\begin{example}[If $L$ is regular, is $L^C$ also regular?]
+    Yes.
+
+    \begin{proof}[Proof of statement $\mathbb R$ is closed under complement.]
+        Let $L \in \mathbb R,$
+        prove $L^C \in \mathbb R:$
+
+        By definition, 
+        \[
+            \exists \DFA \text{ s.t.\ } L(M) = L.
+        \]
+
+        Let $M' = \lst{Q,\Sigma,\delta,s,F^C},$
+
+        then $L(M') = L(M)^C = L^C.$
+
+        $L^C \in \mathbb R$ because $L^C = L(M').$
+    \end{proof}
+\end{example}
+
+\begin{example}[$\forall L_1, L_2$ \\ 
+    $
+        L_1 \in \mathbb R \vee L_2 \in \mathbb R
+        \implies L_1 \cup L_2 \in \mathbb R
+    $]
+        Yes, $\mathbb R$ is closed under union.
+\end{example}
+
