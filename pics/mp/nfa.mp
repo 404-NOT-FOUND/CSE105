@@ -6,22 +6,26 @@ u := 40pt;
 
 beginfig(0);
 
-with spacing((62,29)) matrix.a(3,5);
+with spacing((62,29)) matrix.a(3,6);
 
 node.a[1][0]( TEX("A") );
 node.a[1][1]( TEX("B") );
 node.a[1][2]( TEX("C") );
 node.a[1][3]( TEX("D") );
-node_double.a[0][4]( TEX("E") );
-node.a[2][4]( TEX("F") );
+node.a[1][4]( TEX("E") );
+node_double.a[0][5]( TEX("F") );
+node.a[2][5]( TEX("G") );
 
 incoming(0, "") (a[1][0]) 120;
 
 simple_connect( a1 0, a1 1, 0, "$0,1$" );
 simple_connect( a1 1, a1 2, 0, "$0,1$" );
 simple_connect( a1 2, a1 3, 0, "$0,1$" );
-simple_connect( a1 3, a0 4, 0, "$0$" );
-simple_connect( a1 3, a2 4, 0, "$1$" );
+simple_connect( a1 3, a1 4, 0, "$0,1$" );
+simple_connect( a1 4, a0 5, 0, "$0$" );
+simple_loop( a0 5, "right", "$0,1$" );
+simple_connect( a1 4, a2 5, 0, "$1$" );
+simple_loop( a2 5, "right", "$0,1$" );
 
 endfig;
 % --------------------------------------------------
