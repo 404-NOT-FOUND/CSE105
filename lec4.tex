@@ -1,0 +1,84 @@
+
+\section{Nondeterministic Finite Automaton (NFA)}
+% ==================================================
+
+\begin{example}[How many states do you need?]
+    \[
+        L = \set{ w \in \set{0,1}^* \mid \text{the $5$th digit of $w$ is $0$} }
+    \]
+
+    \centgraph{mp/dfa-2.pdf}
+
+    What if the digits are counted from the right, i.e.\ the last 5th digit?
+
+    \centgraph{mp/dfa-3.pdf}
+
+\end{example}
+
+\begin{definition}[NFA]
+    An NFA is a $5$-tuple
+    \[ \NFA \]
+    where
+    \begin{compactitem}
+    \item $Q$ and $\Sigma$ are finite sets
+    \item $s \in Q, F \subseteq Q$
+    \item $\delta \colon
+        Q \times \Sigma_\varepsilon
+        \footnote{$\Sigma_\varepsilon = \Sigma \cup \set\varepsilon$}
+        \mapsto \powerset(Q)$
+    \end{compactitem}
+
+\end{definition}
+
+
+\begin{definition}[Configurations of NFA]
+    \begin{align*}
+        \Conf &= Q \times \Sigma^*
+        \\
+        I(w)  &= (s, w)
+        \\
+        H     &= Q \times \set\varepsilon
+        \\
+        O(q,\varepsilon) &=
+                            \begin{cases}
+                                \true,  & q \in F  \\
+                                \false, & \text{else}
+                            \end{cases}
+        \\
+        R &= \set{
+            (q,aw) \mapsto (q',w) \mid
+            \forall q \in Q, a \in \Sigma_\varepsilon, w \in \Sigma^*
+        }
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Language of NFA]
+    \[
+        L(N) = \set{ w \mid \exists \text{accepting computation on input $w$} }
+    \]
+\end{definition}
+
+\begin{theorem}
+    \label{thm:NFA_to_DFA}
+    \begin{align*}
+        \forall \text{\upshape DFA} \NFA,  \\
+        \exists \text{\upshape DFA} M = \lst{ Q',\Sigma,\delta',s',F' }
+        \text{ s.t.\ }
+        L(N) = L(M)
+    \end{align*}
+\end{theorem}
+
+\begin{proof}[Proof of \autoref{thm:NFA_to_DFA}]
+    \begin{align*}
+        Q' &= \powerset(Q)  \\
+        F' &= \set{ A \subseteq Q \mid A \cap F \not= \varnothing }  \\
+        s' &= E(\set{s}) = \set{q \in Q \mid \exists s
+                                                \xrightarrow\varepsilon q_1
+                                                \xrightarrow\varepsilon q_2
+                                                \xrightarrow\varepsilon q_3
+                                                \cdots
+                                                \xrightarrow\varepsilon q
+        }  \\
+        \delta'(A, a) &= E( \operatorname*\cup_{q \in A} \delta(q,a) )
+    \end{align*}
+\end{proof}

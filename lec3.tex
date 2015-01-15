@@ -17,16 +17,18 @@ machine is $\true$ is called the \emph{language} of the machine.
     $\Sigma^* = \set{\varepsilon,1,0,10,101,\cdots} = \set{0,1}^*$,
     which of the following languages are regular?
     \begin{compactitem}
+%     \item
+%         $L_1 = \set{ w \in \set{0,1}^* \mid w \text{ is not a multiple of } 3}$,
     \item
-        $L_1 = \set{ w \in \set{0,1}^* \mid w \text{ is not a multiple of } 3}$,
-    \item
-        $L_2 = \set{ w \in \set{0,1}^* \mid w \text{ is a power of } 2}$, and
+        $L_1 = \set{ w \in \set{0,1}^* \mid w \text{ is a power of } 2}$, and
     \item
         $L_2 = \set{ w \in \set{0,1}^* \mid w \text{ is a power of } 3}$.
     \end{compactitem}
     
-    %% draw dfa to test
-    %% l1, l2 are regular, l3 is not
+    $L_1$ is regular while $L_2$ is not. A binary number that is a power of $2$ consists
+    of only one $1$ and all other digits should be $0$s. A DFA that recognizes the
+    language would be
+    \centgraph{mp/dfa-1.pdf}
 
 \end{example}
 
@@ -38,7 +40,7 @@ machine is $\true$ is called the \emph{language} of the machine.
         $L_1 \cup L_2 = \set{w \in \Sigma^* \mid w \in L_1 \vee w \in L_2}$
     \item[Intersection]
         $L_1 \cap L_2 = \set{w \mid w \in L_1 \wedge \in L_2}$
-    \item[Dot Product]
+    \item[Concatenation]
         $L_1 \cdot L_2 = \set{w_1 \cdot w_2 \mid w \in L_1, w_2 \in L_2}$
     \end{compactdesc}
 \end{definition}
