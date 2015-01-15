@@ -1,11 +1,5 @@
 
-verbatimtex
-\documentclass{article}
-\begin{document}
-etex
-
-input automata;
-input boxes;
+input simple_automata;
 input TEX;
 TEXPRE("%&latex" & char(10) & "\documentclass{article}\begin{document}");
 TEXPOST("\end{document}");
@@ -24,37 +18,8 @@ vardef drawPnt(expr p) =
     draw p withpen pencircle scaled emph_pen;
 enddef;
 
-string label_size;
-label_size := " \small ";
-
-vardef simple_loop(suffix p)(expr d, s) = 
-    if d = "left":
-        loop.bot( .65, TEX(label_size & s) )( p ) -165;
-    elseif d = "right":
-        loop.top( .65, TEX(label_size & s) )( p ) -15;
-    elseif d = "up":
-        loop.top( .65, TEX(label_size & s) )( p ) 90;
-    elseif d = "down":
-        loop.top( .65, TEX(label_size & s) )( p ) -90;
-    fi;
-enddef;
-
-vardef simple_connect(suffix p, q)(expr d, s) = 
-    if (d = 0) or (d = 180) or (d = -180) or (d = 360) or (d = -360):
-        arrow.top( .5, TEX(label_size & s) )( p, q ) p.c -- q.c;
-    elseif (d < 0) and (d > -180) or (d > 0) and (d >  180):
-        arrow.bot( .5, TEX(label_size & s) )( p, q ) p.c{dir d} .. q.c;
-    elseif (d > 0) and (d <  180) or (d < 0) and (d < -180):
-        arrow.top( .5, TEX(label_size & s) )( p, q ) p.c{dir d} .. q.c;
-    fi;
-enddef;
-
 % --------------------------------------------------
 beginfig(0); % using package automata.mp
-
-size := 20;
-incominglength := 25;
-loopsize := 22;
 
 with spacing((82,29)) matrix.a(1,3);
 
@@ -104,49 +69,4 @@ simple_loop( a0 2, "right", "$0,1$" );
 endfig;
 % --------------------------------------------------
 
-beginfig(2);
-
-with spacing((62,29)) matrix.a(3,5);
-
-node.a[1][0]( TEX("A") );
-node.a[1][1]( TEX("B") );
-node.a[1][2]( TEX("C") );
-node.a[1][3]( TEX("D") );
-node_double.a[0][4]( TEX("E") );
-node.a[2][4]( TEX("F") );
-
-incoming(0, "") (a[1][0]) 120;
-
-simple_connect( a1 0, a1 1, 0, "$0,1$" );
-simple_connect( a1 1, a1 2, 0, "$0,1$" );
-simple_connect( a1 2, a1 3, 0, "$0,1$" );
-simple_connect( a1 3, a0 4, 0, "$0$" );
-simple_connect( a1 3, a2 4, 0, "$1$" );
-
-endfig;
-% --------------------------------------------------
-beginfig(3);
-
-with spacing((62,29)) matrix.a(1,6);
-
-node.a[0][0]( TEX("A") );
-node.a[0][1]( TEX("B") );
-node.a[0][2]( TEX("C") );
-node.a[0][3]( TEX("D") );
-node.a[0][4]( TEX("E") );
-node_double.a[0][5]( TEX("F") );
-
-incoming(0, "") (a[0][0]) 120;
-
-simple_loop( a0 0, "left", "$0,1$" );
-simple_connect( a0 0, a0 1, 0, "$0$" );
-simple_connect( a0 1, a0 2, 0, "$0,1$" );
-simple_connect( a0 2, a0 3, 0, "$0,1$" );
-simple_connect( a0 3, a0 4, 0, "$0,1$" );
-simple_connect( a0 4, a0 5, 0, "$0,1$" );
-
-endfig;
-% --------------------------------------------------
-
 end
-

@@ -2,17 +2,33 @@
 \section{Nondeterministic Finite Automaton (NFA)}
 % ==================================================
 
+In automata theory, a finite state machine is called a deterministic finite automaton
+(DFA), if
+\begin{compactitem}
+\item each of its transitions is uniquely determined by its source state and input symbol,
+    and
+\item reading an input symbol is required for each state transition.
+\end{compactitem}
+
+A nondeterministic finite automaton (NFA), or nondeterministic finite state machine,
+needn't obey these restrictions. In particular, every DFA is also an NFA.
+(via \href{http://en.wikipedia.org/wiki/Nondeterministic\_finite\_automaton}{WikiPedia})
+
 \begin{example}[How many states do you need?]
+    Given
     \[
         L = \set{ w \in \set{0,1}^* \mid \text{the $5$th digit of $w$ is $0$} }
     \]
-
-    \centgraph{mp/dfa-2.pdf}
+    the DFA is easy to draw:
+    \centgraph{mp/nfa-0.pdf}
 
     What if the digits are counted from the right, i.e.\ the last 5th digit?
 
-    \centgraph{mp/dfa-3.pdf}
-
+    This is where NFAs could be useful. Unlike the earlier language which only takes seven
+    states to create a DFA that recognize it, this one could use numbers of states since
+    we don't really know how many digits to expect before reaching the one that needs to
+    be $0$. An NFA on the other hand, could finish the job with merely six states:
+    \centgraph{mp/nfa-1.pdf}
 \end{example}
 
 \begin{definition}[NFA]
@@ -27,9 +43,7 @@
         \footnote{$\Sigma_\varepsilon = \Sigma \cup \set\varepsilon$}
         \mapsto \powerset(Q)$
     \end{compactitem}
-
 \end{definition}
-
 
 \begin{definition}[Configurations of NFA]
     \begin{align*}
@@ -54,9 +68,64 @@
 
 \begin{definition}[Language of NFA]
     \[
-        L(N) = \set{ w \mid \exists \text{accepting computation on input $w$} }
+        L(N) = \set{ w \mid \exists \text{ accepting computation on input $w$} }
     \]
 \end{definition}
+
+\begin{example}[A simple NFA]
+
+    The following graph shows an automaton $M$ with a binary alphabet that determines if
+    the input ends with a $1$.
+    \centgraph[4cm]{mp/nfa-2.pdf}
+
+    The automaton $M$ shown above is \emph{not} a DFA since reading a $1$ in state $A$ can
+    lead to $A$ or to $B$.
+
+    $M$ in formal notation is
+    \[
+        M = \set{ \set{A,B}, \set{0,1}, \delta, A, \set{B} }
+    \]
+    where the transition function $\delta$ can be defined by the state transition table:
+    \begin{center} \begin{tabular}{McMcMc}
+        \hline
+        ~ & 0           & 1             \\
+        \hline
+        A & \set{A}     & \set{A,B}     \\
+        B & \varnothing & \varnothing   \\
+        \hline
+    \end{tabular} \end{center}
+    Note that $\delta(p,1)$ has more than one state---again therefore $M$ is
+    nondeterministic.
+
+    Some possible state sequences for the input word ``1011'' are:
+    \begin{center} \begin{tabular}{ l *9{Mc} }
+        \hline
+        input               &   & 1 &   & 0 &   & 1 &   & 1 &   \\
+        \hline
+        State sequence $1$  & A &   & B &   & ? &   &   &   &   \\
+        State sequence $2$  & A &   & A &   & B &   & ? &   &   \\
+        State sequence $3$  & A &   & A &   & A &   & B &   & ? \\
+        State sequence $4$  & A &   & A &   & A &   & A &   & B \\
+        \hline
+    \end{tabular} \end{center}
+
+    The word is accepted by $M$ in sequence $4$; it doesn't matter that all other
+    sequences fail to do so. In contrast, the word ``10'', which the state sequences
+    for are shown below, is rejected by $M$, since there is no way to reach the only
+    accepting state, $B$, by reading the final ``0'' symbol or by an
+    $\varepsilon$-transition.
+    \begin{center} \begin{tabular}{ l *5{Mc} }
+        \hline
+        input               &   & 1 &   & 0 &     \\
+        \hline
+        State sequence $1$  & A &   & B &   & ?   \\
+        State sequence $2$  & A &   & A &   & A   \\
+        \hline
+    \end{tabular} \end{center}
+
+    (Example via
+    \href{http://en.wikipedia.org/wiki/Nondeterministic\_finite\_automaton}{WikiPedia})
+\end{example}
 
 \begin{theorem}
     \label{thm:NFA_to_DFA}
@@ -79,6 +148,7 @@
                                                 \cdots
                                                 \xrightarrow\varepsilon q
         }  \\
-        \delta'(A, a) &= E( \operatorname*\cup_{q \in A} \delta(q,a) )
+        \delta'(A, a) &= E\( \operatorname*\cup_{q \in A} \delta(q,a) \)
     \end{align*}
 \end{proof}
+
