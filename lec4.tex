@@ -103,13 +103,12 @@ needn't obey these restrictions. In particular, every DFA is also an NFA.
         input               &   & 1 &   & 0 &   & 1 &   & 1 &   \\
         \hline
         State sequence $1$  & A &   & B &   & ? &   &   &   &   \\
-        State sequence $2$  & A &   & A &   & B &   & ? &   &   \\
-        State sequence $3$  & A &   & A &   & A &   & B &   & ? \\
-        State sequence $4$  & A &   & A &   & A &   & A &   & B \\
+        State sequence $2$  & A &   & A &   & A &   & B &   & ? \\
+        State sequence $3$  & A &   & A &   & A &   & A &   & B \\
         \hline
     \end{tabular} \end{center}
 
-    The word is accepted by $M$ in sequence $4$; it doesn't matter that all other
+    The word is accepted by $M$ in sequence $3$; it doesn't matter that both other
     sequences fail to do so. In contrast, the word ``10'', which the state sequences
     for are shown below, is rejected by $M$, since there is no way to reach the only
     accepting state, $B$, by reading the final ``0'' symbol or by an
