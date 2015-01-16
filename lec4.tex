@@ -45,6 +45,17 @@ needn't obey these restrictions. In particular, every DFA is also an NFA.
     \end{compactitem}
 \end{definition}
 
+As said, since a DFA \emph{is} an NFA, the definition of NFA is simply a generalized
+version of DFA's. The difference that in an NFA a state can transit to multiple states
+shows a different transition function $\delta$---the transition function of an NFA maps to
+a set of states instead of exactly one state as of a DFA.
+
+\subsection{Configurations}
+
+Again the configurations of an NFA are very similar to that of a DFA---except that an NFA
+has an $\varepsilon$ transition, a transition that is performed without requiring any
+input.
+
 \begin{definition}[Configurations of NFA]
     \begin{align*}
         \Conf &= Q \times \Sigma^*
@@ -126,6 +137,12 @@ needn't obey these restrictions. In particular, every DFA is also an NFA.
     \href{http://en.wikipedia.org/wiki/Nondeterministic\_finite\_automaton}{WikiPedia})
 \end{example}
 
+\subsection{NFA \& DFA}
+
+According to \autoref{thm:NFA_to_DFA}, any NFA can be translated to a DFA. The method is
+to fully expand the NFA and draw out every branch of it, which is explained with more
+details in \autoref{dem:NFA_to_DFA}.
+
 \begin{theorem}
     \label{thm:NFA_to_DFA}
     \begin{align*}
@@ -137,6 +154,7 @@ needn't obey these restrictions. In particular, every DFA is also an NFA.
 \end{theorem}
 
 \begin{proof}[Proof of \autoref{thm:NFA_to_DFA}]
+    \label{dem:NFA_to_DFA}
     \begin{align*}
         Q' &= \powerset(Q)  \\
         F' &= \set{ A \subseteq Q \mid A \cap F \not= \varnothing }  \\
