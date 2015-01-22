@@ -1,0 +1,92 @@
+
+% no Haskell on exams.
+
+the class of regular languages is closed under
+\begin{compactitem}
+\item union,
+%     $ \text{ if } L_1, L_2 \in \mathbb R,
+%     \text{ then } L_1 \cup \L_2 \in \mathbb R$;
+\item intersection,
+%     $ \text{ if } L_1, L_2 \in \mathbb R,
+%     \text{ then } L_1 \cap \L_2 \in \mathbb R$;
+\item concatenation, and
+%     $ \text{ if } L_1, L_2 \in \mathbb R,
+%     \text{ then } L_1 \cdot \L_2 \in \mathbb R$;
+\item star.
+    ($L^* = \set{ w_1w_2 \cdots w_n \mid w_1,w_2,\cdots,w_n \in L, n \ge 0 }$)
+%     $ \text{ if } L \in \mathbb R,
+%     \text{ then } L^* \in \mathbb R$;
+\end{compactitem}
+
+\begin{example}[$\mathbb R$ closed under star]
+    \begin{proof}
+        use $\varepsilon$ transition from the final states to the initial states
+        (including states transited directly from the initial state with an $\varepsilon$
+        arrow) to prove that $\mathbb R$ is closed under star.
+    \end{proof}
+\end{example}
+
+\begin{example}[Build a rather complex language]
+    % any number with commas
+    \[
+        \set{1,\cdots,9} \cdot
+        \( \set{0,1,\cdots,9}^* \cdot \set{,} \)^* \cdot
+        \set{0,1,\cdots,9}
+    \]
+\end{example}
+
+\section{Regular Expression}
+% ==================================================
+
+\begin{align*}
+    E = a                   & L(a) = \set{a}                        \\
+    E = \varepsilon         & L(\varepsilon) = \set{\varepsilon}    \\
+    E = E_1 \cdot E_2       & L(E) = L(E_1) \cdot L(E_2)            \\
+    E = E_1 + E_2           & L(E) = L(E_1) + L(E_2)                \\
+    E = (E_1)^*             & L(E) = L\((E_1)^*\) = L(E_1)^*        \\
+    E = \varnothing         & L(\varnothing^*)
+\end{align*}
+
+In fact, the rule
+\[
+    E = \varepsilon         & L(\varepsilon) = \set{\varepsilon}    \\
+\]
+can be replaced with 
+\[
+    E = \varnothing         & L(\varnothing^*)
+\]
+
+\begin{theorem}
+    \forall L \in \mathbb R,
+    \exists \Regex E \text{ s.t.\ } L(E) = L
+\end{theorem}
+
+\begin{definition}[GNFA]
+    A GNFA is an automaton where
+    \begin{compactitem}
+    \item exactly one arrow entering and one leaving a state,
+    \item can be transited using $\varnothing$ arrows,
+    \item can be transited using star arrows,
+    \item no arrows entering the initial state,
+    \item only one final state,
+    \item no arrow leaving the final state.
+    \end{compactitem}
+
+    A GNFA is defined as a $5$-tuple
+    \[
+        \lst{Q,\Sigma,\delta,s,f}
+    \]
+    where
+    \[
+        \delta \colon (Q \backslash \set{f}) \times (Q \backslash \set{s}) 
+        \mapsto \mathbb R(\Sigma)
+    \]
+\end{definition}
+
+A GNFA, since it can use transitions with regular expressions, can help develop a regular
+expression of the language of the GNFA by removing each states until we have the form
+%% pic s-E->f
+
+% regex -> nfa <-> dfa -> regex
+%              -> gnfa -> regex
+
