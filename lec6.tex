@@ -1,22 +1,100 @@
 
 % no Haskell on exams.
 
-the class of regular languages is closed under
+\section{Regular Expression}
+% ==================================================
+
+\subsection{Regular Language}
+% --------------------------------------------------
+
+We've learned that the class of regular languages is closed under
 \begin{compactitem}
 \item union,
-%     $ \text{ if } L_1, L_2 \in \mathbb R,
-%     \text{ then } L_1 \cup \L_2 \in \mathbb R$;
+    \footnote{
+        $
+        \text{ if } L_1, L_2 \in \mathbb R,
+        \text{ then }
+        L_1 \cup L_2 = \set{ w \mid w \in L_1 \lor w \in L_2 }
+        \in \mathbb R
+        .$
+    }
 \item intersection,
-%     $ \text{ if } L_1, L_2 \in \mathbb R,
-%     \text{ then } L_1 \cap \L_2 \in \mathbb R$;
+    \footnote{
+        $
+        \text{ if } L_1, L_2 \in \mathbb R,
+        \text{ then }
+        L_1 \cap L_2 = \set{ w \mid w \in L_1 \land w \in L_2 }
+        \in \mathbb R
+        .$
+    }
 \item concatenation, and
-%     $ \text{ if } L_1, L_2 \in \mathbb R,
-%     \text{ then } L_1 \cdot \L_2 \in \mathbb R$;
+    \footnote{
+        $
+        \text{ if } L_1, L_2 \in \mathbb R,
+        \text{ then }
+        L_1 \cdot L_2 = \set{ w_1w_2 \mid w_1 \in L_1 \land w_2 \in L_2 }
+        \in \mathbb R
+        .$
+    }
 \item star.
-    ($L^* = \set{ w_1w_2 \cdots w_n \mid w_1,w_2,\cdots,w_n \in L, n \ge 0 }$)
-%     $ \text{ if } L \in \mathbb R,
-%     \text{ then } L^* \in \mathbb R$;
+    \footnote{
+        $
+        \text{ if } L \in \mathbb R,
+        \text{ then }
+        L^* = \set{ w_1w_2 \cdots w_n \mid w_1,w_2,\cdots,w_n \in L, n \ge 0 }
+        \in \mathbb R
+        .$
+    }
 \end{compactitem}
+
+Many complex languages can be built using these operations; \autoref{exa:language_numbers}
+is one practical example.
+
+\begin{example}[Build a rather complex language]
+    % any number with commas
+    It is common we want to search for all numbers, say, in a file. The following set is a
+    language that matches all numbers greater than $10$ and allowing appearance of commas.
+    \[
+        L =
+        \set{1,\cdots,9} \cdot
+        \( \set{0,1,\cdots,9}^* \cdot \set{,} \)^* \cdot
+        \set{0,1,\cdots,9}
+    \]
+
+    Consider 
+    \begin{align*}
+        L_1 = \set{1,\cdots,9} \\
+        L_2 = \set{0,1,\cdots,9}^* \cdot \set{,}  \\
+        L_3 = \set{0,1,\cdots,9}  \\
+    \end{align*}
+    so 
+    $L = L_1 \cdot L_2^* \cdot L_3$.
+
+    What are $L_1$, $L_2$ and $L_3$?
+    \begin{compactdesc}
+    \item[$L_1$] is a set of all digits from $1$ to $9$;
+    \item[$L_3$] is a set of all digits from $0$ to $9$;
+    \item[$L_2$] is a little more complicated, it can also be written as $L_3^* \cdot
+        \set{,}$, while $L_3^*$ matches a string of any number of elements in $L_3$, that
+        is, a string made of all digits with unknown length. What $\cdot \set{,}$ does is
+        it appends a comma to the end of this string. In all, $L_2$ is a number of digits
+        with a comma at the end.
+    \end{compactdesc}
+
+    With that, the set $L_1 \cdot L_2^* \cdot L_3$ can be now (roughly) seen as:
+    \[
+        a digit \text{ and }
+        a number of ( a number of digits \text{ and } a comma ) \text{ and }
+        a digit
+    \]
+    Now, notice there is a leading digit and an ending one, why should one be in $L_1$ and
+    the other $L_3$? Because matching from set $L_1$ rules out the numbers with leading
+    $0$s ($L_1$ doesn't have $0$), and the rest of digits should allow $0$s. The middle
+    portion ($L_2^*$) allows unknown number of strings from $L_2$ (even $0$) in between
+    the first and last digit. In the case where the number of $L_2$ is $0$, which makes
+    the input string also in set $L_1 \cdot L_3$, the input string is a two-digit number
+    ($10$ to $99$).
+\end{example}
 
 \begin{example}[$\mathbb R$ closed under star]
     \begin{proof}
@@ -26,67 +104,69 @@ the class of regular languages is closed under
     \end{proof}
 \end{example}
 
-\begin{example}[Build a rather complex language]
-    % any number with commas
-    \[
-        \set{1,\cdots,9} \cdot
-        \( \set{0,1,\cdots,9}^* \cdot \set{,} \)^* \cdot
-        \set{0,1,\cdots,9}
-    \]
-\end{example}
+\subsection{Regular Expression}
+% --------------------------------------------------
 
-\section{Regular Expression}
-% ==================================================
+A regular expression (abbreviated regex or regexp) is a sequence of characters that forms
+a search pattern, mainly for use in pattern matching with strings, or string matching,
+i.e. "find and replace"-like operations.
+(via \href{http://en.wikipedia.org/wiki/Regular_expression}{WikiPedia})
 
+A regex $E$ has the following rules
 \begin{align*}
-    E = a                   & L(a) = \set{a}                        \\
-    E = \varepsilon         & L(\varepsilon) = \set{\varepsilon}    \\
-    E = E_1 \cdot E_2       & L(E) = L(E_1) \cdot L(E_2)            \\
-    E = E_1 + E_2           & L(E) = L(E_1) + L(E_2)                \\
-    E = (E_1)^*             & L(E) = L\((E_1)^*\) = L(E_1)^*        \\
-    E = \varnothing         & L(\varnothing^*)
+    & E = a                   && L(a) = \set{a}                        \\
+    & E = \varepsilon         && L(\varepsilon) = \set{\varepsilon}    \\
+    & E = E_1 \cdot E_2       && L(E) = L(E_1) \cdot L(E_2)            \\
+    & E = E_1 + E_2           && L(E) = L(E_1) + L(E_2)                \\
+    & E = (E_1)^*             && L(E) = L\((E_1)^*\) = L(E_1)^*        \\
+    & E = \varnothing         && L(\varnothing^*)
 \end{align*}
-
 In fact, the rule
 \[
-    E = \varepsilon         & L(\varepsilon) = \set{\varepsilon}    \\
+    L(\varepsilon) = \set{\varepsilon}
 \]
 can be replaced with 
 \[
-    E = \varnothing         & L(\varnothing^*)
+    L(\varnothing^*).
 \]
 
-\begin{theorem}
-    \forall L \in \mathbb R,
-    \exists \Regex E \text{ s.t.\ } L(E) = L
+\begin{theorem}[Equivalence of Regex and Regular Language]
+    \[
+        \forall L \in \mathbb R,
+        \exists \text{ Regex } E \text{ s.t.\ } L(E) = L.
+    \]
 \end{theorem}
 
-\begin{definition}[GNFA]
-    A GNFA is an automaton where
-    \begin{compactitem}
-    \item exactly one arrow entering and one leaving a state,
-    \item can be transited using $\varnothing$ arrows,
-    \item can be transited using star arrows,
-    \item no arrows entering the initial state,
-    \item only one final state,
-    \item no arrow leaving the final state.
-    \end{compactitem}
+\subsection{GNFA}
+% --------------------------------------------------
 
+A generalized nondeterministic finite automaton (GNFA) is an NFA where
+\begin{compactitem}
+\item there are exactly one arrow entering and one leaving a state,
+\item states can be transited using regexes ($\varnothing$ arrows, star arrows, etc.),
+\item there are no arrows entering the initial state,
+\item there is only one final state, and
+\item there are no arrows leaving the final state.
+\end{compactitem}
+
+\begin{definition}[GNFA]
     A GNFA is defined as a $5$-tuple
     \[
-        \lst{Q,\Sigma,\delta,s,f}
+        \lst{ Q,\Sigma,\delta,s,f }
     \]
     where
     \[
-        \delta \colon (Q \backslash \set{f}) \times (Q \backslash \set{s}) 
-        \mapsto \mathbb R(\Sigma)
+        \delta \colon
+        (Q \backslash \set{f}) \times (Q \backslash \set{s})
+        \mapsto
+        \mathbb R(\Sigma)
     \]
 \end{definition}
 
-A GNFA, since it can use transitions with regular expressions, can help develop a regular
-expression of the language of the GNFA by removing each states until we have the form
-%% pic s-E->f
+A GNFA, since it can use transitions with regexes, can help develop a regex of the
+language of the GNFA by removing states one at a time until we have the form
+\centgraph[3.5cm]{mp/gnfa-0}
 
-% regex -> nfa <-> dfa -> regex
-%              -> gnfa -> regex
+The concept of regex finely relates to all automata we've learned so far:
+\centgraph[3cm]{mp/relation_automata_regex-0}
 
