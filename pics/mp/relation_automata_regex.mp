@@ -14,13 +14,13 @@ enddef;
 
 beginfig(0);
 
-boxit.regex(TEX("regex"));
+boxit.regex(TEX("RegEx"));
 boxit.nfa  (TEX("NFA"));
 boxit.dfa  (TEX("DFA"));
 boxit.gnfa (TEX("GNFA"));
 
-nfa.c  - regex.c = (u,0);
-dfa.c  - nfa.c   = (0, u);
+nfa.c  - regex.c = ( u, u);
+dfa.c  - nfa.c   = (-u, 0);
 gnfa.c - nfa.c   = (0,-u);
 
 drawunboxed(regex,nfa,dfa,gnfa);
@@ -31,8 +31,8 @@ drawArrowBetweenBoxes(nfa, dfa);
 drawArrowBetweenBoxes(dfa, nfa);
 drawArrowBetweenBoxes(nfa, gnfa);
 
-drawArrowBetweenBoxes(nfa, regex);
-drawArrowBetweenBoxes(dfa, regex);
+% drawArrowBetweenBoxes(nfa, regex);
+% drawArrowBetweenBoxes(dfa, regex);
 drawArrowBetweenBoxes(gnfa, regex);
 
 endfig;
