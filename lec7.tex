@@ -1,0 +1,76 @@
+
+%% notes on web page
+
+\subsection{Non-Regular Languages}
+% --------------------------------------------------
+
+Are there non-regular languages? 
+The answer is obviously ``Yes,'' but what are they?
+Take binary strings as example, find
+$L \subseteq \set{0,1}^*\ \text{s.t.}\ \forall\ \text{regex}\ E, L(E) \neq L$.
+With symbols 
+$\set{ 0,1,\cdot,+(\cup),*,(,),\varnothing }$,
+any regular language can be expressed,
+\[
+    E = (0+1)^*.
+\]
+Map each of the symbols to
+$
+0 = 000,
+1 = 001,
+\cdot = 010,
+\cdots
+\varnothing = 111
+$
+and use function $\varphi$ to rewrite the regex above,
+\[
+    \varphi(E) = 101\,000\,011\,001\,110\,100 \qquad \in \set{0,1}^*
+\]
+so 
+$
+L(E) \subseteq \set{0,1}^*.
+$
+Then the non-regular language is 
+\[
+    L = \set{ \varphi(E) \mid \varphi(E) \notin L(E) }.
+\]
+\begin{proof}[
+    Proof of $\varphi(''\varnothing'') = ''111'' \notin L(\varnothing) = \varnothing$
+]
+    Assume for controdiction $L$ is regular,  \\
+    Let $E$ s.t.\ $L(E) = L$.  \\
+    \[
+        \varphi(E) \in L \leftrightarrow \varphi(E) \notin L(E) = L.
+    \]
+\end{proof}
+
+\subsection{Pumping Lemma}
+% --------------------------------------------------
+
+Every regular language satisfies property $P$,
+if a language $L$ does not satisfy $P$ then $L$ is non-regular.
+In proving, we will first assume $P(L)$ and lead to controdiction.
+
+\begin{definition}[Property $P$]
+    \begin{align*}
+        &\exists p \ge 1 \qquad \text{(pumping length)}     \\
+        &\forall w \in L, \abs{w} \ge p                     \\
+        &\exists x,y,z, w = x \cdot y \cdot z               \\
+    \end{align*}
+    \begin{compactitem}
+    \item
+        $
+        \forall i \ge 0, \quad
+        x \cdot y^i \cdot z = x \overbrace{yy \cdots y}^i z \in L
+        $,
+    \item
+        $
+        y \neq \varepsilon
+        $,
+    \item
+        $
+        \abs{xy} \le p
+        $.
+    \end{compactitem}
+\end{definition}
+
