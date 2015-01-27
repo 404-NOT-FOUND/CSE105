@@ -169,3 +169,50 @@ details in \autoref{dem:NFA_to_DFA}.
     \end{align*}
 \end{proof}
 
+\begin{example}[Convert the following NFA to DFA]
+    \label{exa:NFA_to_DFA}
+
+    \centgraph[9cm]{mp/nfa_to_dfa-0}
+    
+    Start with the initial state, state $1$, form a set of its $\varepsilon$-enclosure
+    $I = E(\set{s}) = \set{1,2}$.
+    
+    For each element of set $I$, find
+    $\delta(q,a)\ \text{where}\ q \in I$
+    and produce a new set
+    $\set{\delta(1,a),\delta(2,a)} = \set{4,5,\varnothing} = \set{4,5}$,
+    Let $I_a$ be its $\varepsilon$-enclosure
+    $I_a = E(\set{4,5}) = \set{4,7,5,6,2}$.
+
+    Similar for input symbol $b$, form
+    $I_b = E(\set{\delta(1,b),\delta(2,b)}) = E(\set{3}) = \set{3,8}$.
+
+    Make $I_a$ and $I_b$ new states and find $I_{a_a}, I_{a_b}, I_{b_a},\ \text{and}\ I_{b_b}$
+    respectively; Repeat the procedure until no new states are formed.
+
+    The following table neatly traces the whole process:
+    \begin{center}
+    \begin{tabular}{ *4{Ml} }
+        \text{States} & I   & I_a               & I_b           \\
+        \hline
+        1 & \set{1,2}       & \set{4,7,5,6,2}   & \set{3,8}     \\
+        2 & \set{4,7,5,6,2} & \varnothing       & \set{9,3,8}   \\
+        3 & \set{3,8}       & \set{9}           & \varnothing   \\
+        4 & \set{9,3,8}     & \set{9}           & \varnothing   \\
+        5 & \set{9}         & \varnothing       & \varnothing   \\
+    \end{tabular}
+    \end{center}
+
+    With the table, we use the $\varepsilon$-enclosure of the original initial state as
+    the initial state of our DFA and those contain original final states as our new final
+    states. Thus the new initial state is state $1$ and final states are $2,4,5$ (state
+    $2$ contains $6$ and $7$, state $4$ and $5$ have $9$).
+    
+    The first row shows that state $1$ reading the input $a$ produces state
+    $\set{4,7,5,6,2}$, which in the table is state $2$. Therefore in the DFA, we expect
+    state $1$ transited to state $2$ with an $a$-arrow.
+
+    With all the information we need, draw out the DFA:
+    \centgraph[4.5cm]{mp/nfa_to_dfa-1}
+\end{example}
+
