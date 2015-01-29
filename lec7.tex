@@ -4,11 +4,11 @@
 \subsection{Non-Regular Languages}
 % --------------------------------------------------
 
-Are there non-regular languages? 
+Are there non-regular languages?
 The answer is obviously ``Yes,'' but what are they?
 Take binary strings as example, find
 $L \subseteq \set{0,1}^*\ \text{s.t.}\ \forall\ \text{regex}\ E, L(E) \neq L$.
-With symbols 
+With symbols
 $\set{ 0,1,\cdot,+(\cup),*,(,),\varnothing }$,
 any regular language can be expressed,
 \[
@@ -26,14 +26,27 @@ and use function $\varphi$ to rewrite the regex above,
 \[
     \varphi(E) = 101\,000\,011\,001\,110\,100 \qquad \in \set{0,1}^*
 \]
-so 
+so
 $
 L(E) \subseteq \set{0,1}^*.
 $
-Then the non-regular language is 
+Then the non-regular language is
 \[
-    L = \set{ \varphi(E) \mid \varphi(E) \notin L(E) }.
+    L = \set{ \varphi(E) \mid \varphi(E) \notin L(E) },
 \]
+which is called the diagonal language (see \autoref{def:diagonal_language}).
+
+\begin{definition}[Diagonal Language]
+    \label{def:diagonal_language}
+    \[
+        D = \set{
+            \varphi(E)
+            \mid
+            E \in \text{RegEx}\(\set{0,1}\) , \varphi(E) \notin L(E)
+        }
+    \]
+\end{definition}
+
 \begin{proof}[
     Proof of $\varphi(''\varnothing'') = ''111'' \notin L(\varnothing) = \varnothing$
 ]
@@ -55,8 +68,9 @@ In proving, we will first assume $P(L)$ and lead to controdiction.
     \begin{align*}
         &\exists p \ge 1 \qquad \text{(pumping length)}     \\
         &\forall w \in L, \abs{w} \ge p                     \\
-        &\exists x,y,z, w = x \cdot y \cdot z               \\
+        &\exists x,y,z \in \Sigma^*, w = x \cdot y \cdot z
     \end{align*}
+    and
     \begin{compactitem}
     \item
         $
@@ -65,7 +79,7 @@ In proving, we will first assume $P(L)$ and lead to controdiction.
         $,
     \item
         $
-        y \neq \varepsilon
+        \abs{y} \ge 0 ( y \neq \varepsilon )
         $,
     \item
         $
