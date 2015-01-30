@@ -1,0 +1,90 @@
+
+% \begin{example}[]
+%     let
+%     \[
+%         L = \set{ w \in \set{0,1}^* \mid w^{\text{reverse}} = w }
+%     \]
+% \end{example}
+
+\begin{example}[]
+    let
+    \[
+        P = \set{ w \in \set{1}^* \mid \text{$\abs w$ is a prime number} }.
+    \]
+    Claim: $P$ is not regular.
+
+    To prove it, the pumping lemma would help. Here is the proof.
+    \begin{proof}\ 
+
+        Assume for contradiction $P$ is regular. \\
+        Therefore, by P.L.,
+        there is an $n \ge 1$ s.t.\
+        all $w \in L$ of length $\abs w \ge n$ can be pumped.
+
+        Let $w = 1^m$ s.t.\ $m \ge n$ and $m$ is a prime, \\
+        Thus $w = 1^m$ satisfies all 3 conditions of P.L.
+
+        Let
+        $w = xyz$ s.t.\ $w$ remains satisfying the P.L. \\
+        Then $\abs x + \abs y + \abs z = m$ is a prime. \\
+        By P.L.,
+        \begin{align*}
+            x y^i z
+            &= 1^{\abs x} \cdot 1^{i \cdot \abs y} \cdot 1^{\abs z}  \\
+            &= 1^{\abs x + i \abs y + \abs z}  \\
+            \in L
+        .\end{align*}
+        That is,
+        ${\abs x + i \abs y + \abs z}$
+        is also a prime.
+
+        Let
+        $i = m+1$,
+        \begin{align*}
+            &\phteq \abs x + \abs y + \abs z + (i-1)\abs y  \\
+            &=      m + (i-1)\abs y  \\
+            &=      m + m\abs y  \\
+            &=      m(1+\abs y)
+            \end{align*}
+        is not a prime, \\
+        Contradicting
+        $xy^iz \in L$.
+    \end{proof}
+
+\end{example}
+
+\section{Finite State Transducers (FST)]}
+
+\begin{definition}[Finite State Transducers (FST)]
+    A FST is 
+    \[
+        M = \lst{ Q,\Sigma,\Gamma,\delta,s }
+    ,\]
+    where
+    \begin{compactitem}
+    \item $Q$ is finite set of states,
+    \item $\Sigma, \Gamma$ are finite sets of i/o symbols,
+    \item $s \in Q$ is the start state, and
+    \item $\delta \colon Q \times \Sigma \mapsto Q \times \Gamma^*$
+        is the transition function.
+    \end{compactitem}
+\end{definition}
+
+\begin{definition}
+    $
+    \delta^*(q,w) \in Q \times \Gamma^*
+    $
+    is the extended relation function defined as such:
+    \begin{align*}
+        \delta^*(q,\varepsilon) &= (q,\varepsilon) \\
+        \delta^*(q,ab)          &= (s,uv) \quad \text{ if } \\
+                                && \delta(q,a)   &= (r,u) \text{ and } \\
+                                && \delta^*(r,b) &= (s,v) \\
+                                &&&& \text{ where $a,u \in \Sigma, b,v \in \Sigma^*$}
+    .\end{align*}
+\end{definition}
+
+\[
+    f_M(w) = u \quad\text{s.t.}\quad \delta^*(s,w) = (q,u)
+.\]
+
