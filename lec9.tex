@@ -53,10 +53,10 @@
 
 \end{example}
 
-\section{Finite State Transducers (FST)]}
+\section{Finite State Transducers (FST)}
 
 \begin{definition}[Finite State Transducers (FST)]
-    A FST is 
+    An FST is 
     \[
         M = \lst{ Q,\Sigma,\Gamma,\delta,s }
     ,\]
@@ -70,7 +70,7 @@
     \end{compactitem}
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Transition Function of an FST]
     $
     \delta^*(q,w) \in Q \times \Gamma^*
     $
@@ -84,7 +84,9 @@
     .\end{align*}
 \end{definition}
 
+\begin{definition}[$f_M$ of an FST]
 \[
     f_M(w) = u \quad\text{s.t.}\quad \delta^*(s,w) = (q,u)
 .\]
+\end{definition}
 

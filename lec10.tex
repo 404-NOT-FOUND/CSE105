@@ -1,0 +1,56 @@
+
+\subsection{FST and DFA}
+
+Combine FST $M$ with DFA $M'$ to test the translated string.
+An FST combined with a DFA is a DFA.
+Notice that an FST does not have a language; rather than procedures such as DFAs, it instead describes
+a function.
+
+\begin{theorem}[]\ \\
+    \label{thm:translation_of_DFA}
+    $
+    \forall \text{\upshape FST} M = \lst{Q,\Sigma,\Gamma,\delta,s},   \\
+    \phantom{\forall} \text{\upshape DFA} M' = \lst{Q',\Gamma,\delta',s',F'},  \\
+    \exists \text{\upshape DFA} M'' = \lst{Q'',\Sigma,\delta'',s'',F''}
+    \text{ s.t.\ }
+    $
+    \[
+        L(M') = f_M^{-1} \( L(M') \) \text{ meaning }
+        L(M'') = \set{ w \in \Sigma^* \mid f_M(w) \in L(M') }.
+    \]
+\end{theorem}
+
+\begin{proof}[Proof of \autoref{thm:translation_of_DFA}]
+    \begin{align*}
+        \text{Let }
+        & Q'' = Q \times Q',  \\
+        & S'' = (s,s'),       \\
+        & F'' = Q \times F',  \\
+        & \delta'' \colon Q'' \times \Sigma \mapsto Q'' \text{ s.t.\ } \\
+        & \delta''((q,q'),a) = \big( q'', \delta'^*(q',w) \big)
+        \text{ where } (q'',w) = \delta(q,a).
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[]
+    %% pic fst -> fst
+    Compose two FST
+    %% see class notes
+\end{theorem}
+
+\begin{definition}[Reduction of Languages]
+    \[
+        f \colon \Sigma^* \mapsto \Gamma^* \text{ s.t.\ } A = f^{-1}(B)
+    \]
+    is called a reduction from $A$ to $B$. If such reduction exists, we say $A$ is
+    reducable to $B$, denoted by
+    \[
+        \reducable AB.
+    \]
+\end{definition}
+
+\begin{theorem}[]\ \\
+    If $\reducable AB$ and $B$ is regular, then $A$ is regular. \\
+    If $\reducable AB$ and $A$ is not regular, then $B$ is not regular.
+\end{theorem}
+
