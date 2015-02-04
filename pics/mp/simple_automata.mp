@@ -18,9 +18,9 @@ vardef simple_loop(suffix p)(expr d, s) =
     elseif d = "right":
         loop.top( .70, TEX(label_size & s) )( p ) -15;
     elseif d = "up":
-        loop.top( .65, TEX(label_size & s) )( p ) 90;
+        loop.urt( .35, TEX(label_size & s) )( p ) 90;
     elseif d = "down":
-        loop.top( .65, TEX(label_size & s) )( p ) -90;
+        loop.lrt( .65, TEX(label_size & s) )( p ) -90;
     fi;
 enddef;
 
