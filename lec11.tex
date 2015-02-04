@@ -1,0 +1,84 @@
+
+\begin{example}[Application of reductions]
+
+    $A$ and $B$ are languages where
+    \begin{align*}
+        A = \set{ 0^n 1^n \mid n \ge 0 } \quad \text{and} \quad
+        B = \set{ 0^n 1 0^n \mid n \ge 0 }
+    ,\end{align*}
+    Given that $A$ is nonregular, is $B$ regular?
+
+    \begin{proof}
+        Build an FST that translates $A$ to $B$,
+        \centgraph[4cm]{mp/fst-0}
+        so 
+        $
+        A \reducable B
+        .$
+        Since $A$ is nonregular,
+        $B$ is nonregular, too.
+    \end{proof}
+
+\end{example}
+
+\begin{example}
+    Which ones of the following statements are true?
+    \begin{compactenum}
+    \item If $B$ is regular then $f_M^{-1}(B)$ is regular, \label{itm:B->f-1B} 
+    \item If $A$ is regular then $f_M(A)$ is regular, \label{itm:A->fA}
+    \item If $A$ is nonregular then $f_M(A)$ is nonregular. \label{itm:notA->notfA}
+    \end{compactenum}
+
+    Statements \ref{itm:B->f-1B} and \ref{itm:A->fA} are true.
+    Statement \ref{itm:notA->notfA} can be easily proved wrong with FST
+    \centgraph[3cm]{mp/fst-1}
+    which translates any string (regular or nonregular) consisted with 0s and 1s to empty
+    string $\varepsilon$, thus to a regular language $\set{\varepsilon}$.
+\end{example}
+
+\section{NFST}
+% ==================================================
+
+\begin{definition}[NFST]
+    A Nondeterministic Finite State Transducer (NFST) is 
+    \[
+        M = \lst{Q,\Sigma,\Gamma,\delta,s,F}
+    \]
+    where
+    \begin{compactenum}
+    \item $Q$      is a finite set of states,
+    \item $\Sigma$ is a finite set of input  symbols,
+    \item $\Gamma$ is a finite set of output symbols,
+    \item 
+        $
+        \delta \colon
+        Q \times \Sigma_\varepsilon \mapsto
+        \powerset(Q \times \Gamma_\varepsilon)
+        $
+        is the transition function,
+    \item $s \in Q$ is the start state, and
+    \item $F \subseteq Q$ is a set of final states.
+    \end{compactenum}
+\end{definition}
+
+An NFST outputs a set of strings on an input.
+
+\begin{definition}[Possible Outputs]
+    The set of possible outputs of $M$ on input $w$
+    \[
+        f_M \colon \Sigma^* \mapsto \gamma (\Gamma^*)
+    \]
+    is defined as
+    \[
+        f_M(w) = \set{ u \in \Gamma^* \mid (q,u) \in \delta^*(s,w), q \in F }
+    \]
+\end{definition}
+
+\begin{theorem}\
+    \begin{compactitem}
+    \item If $A \reducableN B$ and $B$ is regular, then $A$ is regular,
+    \item If $A \reducableN B \reducableN C$ then $A \reducableN C$,
+    \item If $f = f_M$ then $\exists M' \text{ s.t.\ } f^{-1} = f_{M'}$.
+    \end{compactitem}
+\end{theorem}
+
