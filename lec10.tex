@@ -1,5 +1,6 @@
 
 \subsection{FST and DFA}
+% --------------------------------------------------
 
 Combine FST $M$ with DFA $M'$ to test the translated string.
 An FST combined with a DFA is a DFA.
@@ -32,11 +33,35 @@ a function.
     \end{align*}
 \end{proof}
 
-\begin{theorem}[]
-    %% pic fst -> fst
-    Compose two FST
-    %% see class notes
+\subsection{Composing FSTs}
+% --------------------------------------------------
+
+\begin{theorem}[FSTs are Composable]
+    \label{thm:composable_FST}
+    \begin{align*}
+        & \forall \text{\upshape FST} M_1 = \lst{Q_1,\Sigma,\Gamma,\delta_1,s_1},
+                                      M_2 = \lst{Q_2,\Gamma,\Delta,\delta_2,s_2}, \\
+        & \exists \text{\upshape FST} M = M_2 \circ M_1
+        \text{ s.t.\ } f_M = f_{M_2} \circ f_{M_1}.
+    \end{align*}
 \end{theorem}
+
+\begin{proof}[Proof of \autoref{thm:composable_FST}]
+    $
+    \text{Let } M = (Q, \Sigma, \Delta, \delta, s)
+    \text{ where } Q = Q1 \times Q2, s = (s1, s2) \in Q \text{ and }
+    \delta: Q \times \Sigma_1 \mapsto Q \times \Gamma^*_2
+    \text{ is the function defined as }
+    \delta((q_1, q_2), a) = ((q_1', q_2')), v) \text{ with }
+    (q_1',u) = \delta_1(q_1,a)   \text{ and }
+    (q_2',v) = \delta_2^*(q_2,u) \text{ and }
+    $
+    It can be easily verified by induction that
+    $f_M = f_{M_2} \circ f_{M_1}$.
+\end{proof}
+
+\subsection{FST-Reductions}
+% --------------------------------------------------
 
 \begin{definition}[Reduction of Languages]
     \[
@@ -45,12 +70,12 @@ a function.
     is called a reduction from $A$ to $B$. If such reduction exists, we say $A$ is
     reducable to $B$, denoted by
     \[
-        \reducable AB.
+        A \reducable B.
     \]
 \end{definition}
 
 \begin{theorem}[]\ \\
-    If $\reducable AB$ and $B$ is regular, then $A$ is regular. \\
-    If $\reducable AB$ and $A$ is not regular, then $B$ is not regular.
+    If $A \reducable B$ and $B$ is regular, then $A$ is regular. \\
+    If $A \reducable B$ and $A$ is not regular, then $B$ is not regular.
 \end{theorem}
 
