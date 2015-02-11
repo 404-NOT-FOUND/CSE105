@@ -1,0 +1,83 @@
+
+\section{Context free Languages}
+% ==================================================
+
+\[
+    R = \set{ \varphi(E) \mid \text{$E$ is a regular expression over $\set{0,1}$} }
+\]
+
+\[
+    E \in \set{0,1,(,),\varnothing,*,+,\cdot}^*
+\]
+similarly, map each symbol to a binary string.
+
+Is $R$ a regular language?
+
+\begin{proof}
+To prove that $R$ is not regular, we need to find a nonregular language $L$ so
+$
+L \reducable R
+.$
+
+Let
+\[
+    L = \set{ 0^n1^n \mid n\ge 0}
+,\]
+build the FST that translates from $L$ to $E$.
+%% pics
+
+Thus proved that $R$ can be nonregular.
+\end{proof}
+
+$
+\forall \varphi(E) \in R,
+$
+is $L(E)$ regular?
+
+Yes. This question differs from the earlier one since the earlier question was about
+$R$, the set of \emph{all} regexes. Language of every regex is a regular language, yet
+that of the set of all regexes is not.
+
+\subsection{Context Free Grammars}
+
+\begin{definition}[Context Free Grammars]
+    A context free grammar
+    \begin{align*}
+        G_L \colon S \mapsto \varepsilon \\
+        S \mapsto 0S1
+    \end{align*}
+    Starting from symbol
+\end{definition}
+
+\begin{example}[]
+    \[
+        S \mapsto 0S1 \mapsto 00S11 \mapsto 00\varepsilon11 = 0011 \in L
+    \]
+\end{example}
+
+\[
+    L(G_L) = \set{ w \mid S \mapsto \cdots \mapsto w \in \Sigma^* }
+\]
+
+\begin{align*}
+    G_R \colon  &S \mapsto \varnothing  \\
+                &S \mapsto 0            \\
+                &S \mapsto 1            \\
+                &S \mapsto (S)          \\
+                &S \mapsto S \cdot S    \\
+                &S \mapsto S + S        \\
+                &S \mapsto S^*
+\end{align*}
+
+With string ``$0+0\cdot0$,'' the expression can be treated as
+%%% tree
+but also
+%%% tree
+Thus we would like to adopt a set of grammar so the 
+
+\begin{align*}
+S \mapsto T \mid T + S  \\
+T \mapsto F \mid F \cdot T  \\
+F \mapsto F^* \mid 0 \mid 1 \mid (S) \mid \varnothing
+\end{align*}
+
