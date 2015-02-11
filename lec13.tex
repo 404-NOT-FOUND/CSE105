@@ -1,0 +1,84 @@
+
+\[
+    G = \lst{\Sigma, V, S, R}
+\]
+where
+\begin{compactitem}
+\item
+    $\Sigma, V$ are finite sets for input alphabet and variable symbols,
+\item
+    $S \in V$ is the start variable,
+\item
+    $R \subseteq V \times (V \cup \Sigma)^*$ is a finites set of rules.
+\end{compactitem}
+
+\begin{example}[A simple grammar]
+    \label{exa:a_simple_grammer}
+    A grammar 
+    \[
+        G = \lst{\Sigma, V, S, R}
+    \]
+    \begin{align*}
+        \Sigma = \set{0,1,+,*,(,)}  \\
+        V = \set{E,T,F}             \\
+        S = E                       \\
+        \abs R = 7
+    \end{align*}
+    with rules
+    \begin{align*}
+        E &\mapsto E + T \mid T      \\
+        T &\mapsto T * F \mid F      \\
+        F &\mapsto 0 \mid 1 \mid (E)
+    \end{align*}
+\end{example}
+
+\begin{example}[Is $(0+1)*0$ in $L(G)$?]
+    With the grammar defined in \autoref{exa:a_simple_grammer}, 
+    consider the expression $(0+1)*0 \in L(G)$?
+
+    \[
+        E \mapsto T \mapsto T*F \mapsto F*F \mapsto (E)*F \mapsto (E+T)*F
+        \mapsto (T+F)*F \mapsto (F+F)*F \mapsto (0+1)*0 \in \Sigma^*
+    \]
+\end{example}
+
+\begin{definition}[Leftmost Derivatioonn]
+    leftmost derivation
+    is a sequence 
+    $w_1, w_2, \cdots, w_n \in (V \cup \Sigma)^*$ 
+    such that 
+    \begin{compactitem}
+    \item $w_1 = S$
+    \item $w_n \in S^*$
+    \item $\forall i = 1, \cdots, n-1$:
+        \begin{compactitem}
+        \item
+            $w_i = \alpha X \beta \quad \text{ where }
+            \alpha \in \Sigma^*, X \in V, \beta \in (\Sigma \cup V)^*,$
+        \item
+            $w_{i+1} = \alpha \gamma \beta \quad \text{ where }
+            (X, \gamma) \in R.$
+        \end{compactitem}
+    \end{compactitem}
+\end{definition}
+
+\begin{definition}[Language of a Grammar]
+    \begin{align*}
+    L(G) &= \set{ w \in \Sigma^* \mid S \mapsto_G^* w }   \\
+         &= \set{ w \mid \text{ there is a leftmost derivation of $w$ in $G$} }
+    \end{align*}
+\end{definition}
+
+\begin{example}[Palindromes]
+    Write a grammar for the following language,
+    \[
+        P = \set{ w \in {0,1} \mid w^R = w }.
+    \]
+
+    \[
+        E \mapsto 0E0 \mid 1E1 \mid 0 \mid 1 \mid \varepsilon
+    \]
+\end{example}
+
+push what has been read onto the stack and check for reversion instantly.
+Push a special symbol in the very first for the ``beginning of string.''
