@@ -1,0 +1,61 @@
+
+% context free grammar
+
+\subsection{Push Down Automata}
+
+\begin{example}[Bracket Matching]
+    The push down automaton described as following
+    \centgraph[7cm]{mp/push_down-0}
+    recognizes the language 
+    \[
+        \set{ 0^n 1^n \mid n \ge 0 }.
+    \]
+\end{example}
+
+\begin{example}[Same number of 0's and 1's]
+    A push down automaton can be easily constructed to recognize the language,
+    \centgraph[7cm]{mp/push_down-1}
+%     \[
+%         S \mapsto SS \mid 0S1 \mid 1S0 \mid \varepsilon
+%     \]
+\end{example}
+
+\section{PDA}
+
+\begin{definition}[PDA]
+    A PDA is 
+    \[
+        M = \lst{Q, \Sigma, \Gamma, \delta, s, F}
+    \]
+    where
+    \begin{compactitem}
+    \item
+        $\Sigma, \Gamma$ are finite sets of alphabets,
+    \item
+        $Q$ is a finite set of states,
+    \item
+        $s \in Q$ is the starting state,
+    \item
+        $F \subseteq Q$ is a finite set of the final states, and
+    \item
+        $\delta \colon Q \times \Sigma_\varepsilon \times \Gamma_\varepsilon
+        \mapsto
+        \gamma(Q \times \Gamma_\varepsilon)$
+    \end{compactitem}
+\end{definition}
+
+\begin{definition}[Configurations]
+    \begin{align*}
+        \Conf_M &= Q \times \Sigma^* \times \Gamma^*    \\
+        I_M(w)  &= (s,w,\varepsilon)                    \\
+        H_M     &= \set{ (q,w,z) \mid w = \varepsilon } \\
+        O_M\( (q,\varepsilon,z)\) &=
+                    \begin{cases}
+                        \text{accept} & q \in F  \\
+                        \text{reject} & \text{else}
+                    \end{cases}                         \\
+        R(q',w,cz)
+    \end{align*}
+\end{definition}
+
+
