@@ -32,6 +32,22 @@ simple_loop( a0 0, "up", "$1/\varepsilon, 0/\varepsilon$");
 
 endfig;
 % --------------------------------------------------
-%
+
+beginfig(2);
+
+with spacing((62,29)) matrix.a(1,2);
+
+node.a[0][0]( TEX("A") );
+node.a[0][1]( TEX("B") );
+
+incoming(0, "") (a[0][0]) 180;
+
+simple_loop( a0 0, "up", "$0/010$" );
+simple_connect( a0 0, a0 1, -50, "$1/100\,011$" );
+simple_loop( a0 1, "up", "$1/011$" );
+
+endfig;
+% --------------------------------------------------
+
 end
 
