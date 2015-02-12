@@ -43,7 +43,7 @@ which is called the diagonal language (see \autoref{def:diagonal_language}).
         D = \set{
             \varphi(E)
             \mid
-            E \in \text{RegEx}\(\set{0,1}\) , \varphi(E) \notin L(E)
+            E \in \text{regex}\(\set{0,1}\) , \varphi(E) \notin L(E)
         }
     \]
 \end{definition}
@@ -51,7 +51,7 @@ which is called the diagonal language (see \autoref{def:diagonal_language}).
 \begin{proof}[
     Proof of $\varphi(''\varnothing'') = ''111'' \notin L(\varnothing) = \varnothing$
 ]
-    Assume for controdiction $L$ is regular,  \\
+    Assume for contradiction $L$ is regular,  \\
     Let $E$ s.t.\ $L(E) = L$.  \\
     \[
         \varphi(E) \in L \leftrightarrow \varphi(E) \notin L(E) = L.
@@ -63,7 +63,7 @@ which is called the diagonal language (see \autoref{def:diagonal_language}).
 
 Every regular language satisfies property $P$,
 if a language $L$ does not satisfy $P$ then $L$ is non-regular.
-In proving, we will first assume $P(L)$ and lead to controdiction.
+In proving, we will first assume $P(L)$ and lead to contradiction.
 
 \begin{definition}[Property $P$]
     \begin{align*}
