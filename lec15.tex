@@ -1,0 +1,37 @@
+
+\begin{align*}
+    S &\mapsto aSc \mid T \\
+    T &\mapsto bT  \mid \varepsilon
+\end{align*}
+
+Clearly, the grammar above describes a language
+\[
+    L(G) = \set{ a^m b^n c^m },
+\]
+e.g. abc, which is generated through
+\[
+    S \mapsto aSc \mapsto aTc \mapsto abTc \mapsto ab\varepsilon c \mapsto abc.
+\]
+
+Claim:
+\begin{align*}
+    \forall \text{\upshape CFG} G = \lst{V,\Sigma,S,R}, \\
+    \exists \text{\upshape PDA} P = \lst{Q,\Sigma,\Gamma,\delta,s,F} \text{ s.t.\ }  \\
+    L(G) = L(P)
+\end{align*}
+
+\begin{proof}
+    \[
+        \abs Q = 4 + \sum_{(x \to \alpha) \in R} \max( \abs \alpha -1, 0 )
+    \]
+\end{proof}
+
+Claim: $P \mapsto G$
+\begin{align*}
+    V &= \set{ A_{pq} \mid p, q \in Q }  \\
+    S &= A_{sf}  \\
+    A_{pp} \mapsto \varepsilon
+    A_{pq} \mapsto A_{pr} A_{rq}
+    A_{pq} \mapsto A_{pr} A_{rq}
+\end{align*}
+

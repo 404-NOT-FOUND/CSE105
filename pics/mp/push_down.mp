@@ -42,5 +42,31 @@ simple_connect( a0 1, a0 2, -50, "pop(\$)" );
 endfig;
 % --------------------------------------------------
 
+beginfig(2);
+
+with spacing((82,51)) matrix.a(2,3);
+
+node.a[1][0]( TEX("A") );
+node.a[1][1]( TEX("B") );
+node_double.a[1][2]( TEX("C") );
+node.a[0][1]( TEX("D") );
+
+incoming(0, "") (a[1][0]) 120;
+
+simple_loop( a1 0, "left", "$\varepsilon, \varepsilon \to 1$" );
+simple_connect( a1 0, a1 1, 0, "$a, 1 \to \varepsilon$" );
+simple_connect( a1 0, a0 1, 0, "$b, 1 \to \varepsilon$" );
+
+simple_loop( a1 1, "down", "" );
+simple_connect( a1 1, a1 2, 0, "" );
+
+simple_loop( a1 2, "right", "" );
+simple_connect( a1 2, a0 1, 0, "" );
+
+simple_connect( a0 1, a1 1, 0, "" );
+
+endfig;
+% --------------------------------------------------
+
 end
 
